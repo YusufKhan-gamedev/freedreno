@@ -151,12 +151,12 @@ wrap%.o: wrap%.c
 %.o: %.c
 	$(CC) -fPIC -g -c $(CFLAGS) $(LFLAGS) $< -o $@
 
-# You *might* want to add -llog onto this if problems occur...
+# You *might* want to add -llog onto this and libfakewrap if problems occur...
 libwrap.so: wrap-util.o wrap-syscall.o $(WRAP_C2D2)
 	$(LD) -shared -ldl -lc $^ -o $@
 
 libwrapfake.so: wrap-util.o wrap-syscall-fake.o
-	$(LD) -shared -ldl -lc -llog $^ -o $@
+	$(LD) -shared -ldl -lc $^ -o $@
 
 test-%: test-%.o $(UTILS)
 	$(LD) $^ $(LFLAGS) -o $@
