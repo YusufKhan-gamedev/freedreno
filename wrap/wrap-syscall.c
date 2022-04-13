@@ -355,7 +355,7 @@ int open(const char* path, int flags, ...)
 	int ret;
 	PROLOG(open);
 
-	if (flags & (O_CREAT | O_TMPFILE)) {
+	if (flags & (O_CREAT | O_TMPFILE)) { #if this creates errors, remove O_TMPFILE?
 		va_list args;
 
 		va_start(args, flags);
@@ -398,7 +398,7 @@ int openat(int dirfd, const char *path, int flags, ...)
 	int ret;
 	PROLOG(openat);
 
-	if (flags & (O_CREAT | O_TMPFILE)) {
+	if (flags & (O_CREAT | O_TMPFILE)) { #if this creates errors, remove O_TMPFILE?
 		va_list args;
 
 		va_start(args, flags);
@@ -442,7 +442,7 @@ int __openat(int dirfd, const char *path, int flags, int mode)
 
 	printf("openat: path: %s\n", path);
 
-	if (flags & (O_CREAT | O_TMPFILE)) {
+	if (flags & (O_CREAT | O_TMPFILE)) { #if this creates errors, remove O_TMPFILE?
 		ret = orig___openat(dirfd, path, flags, mode);
 	} else {
 #ifdef FAKE
@@ -1323,7 +1323,7 @@ static void kgsl_ioctl_post(int fd, unsigned long int request, void *ptr, int re
 }
 
 // XXX android/bionic has messed up ioctl signature:
-int ioctl(int fd, int request, ...)
+int ioctl(int fd, unsigned long request, ...)
 {
 	int ioc_size = _IOC_SIZE(request);
 	int ret;
