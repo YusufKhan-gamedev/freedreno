@@ -355,7 +355,7 @@ int open(const char* path, int flags, ...)
 	int ret;
 	PROLOG(open);
 
-	if (flags & (O_CREAT | O_TMPFILE)) { #if this creates errors, remove O_TMPFILE?
+	if (flags & (O_CREAT | O_TMPFILE)) { /* #if this creates errors, remove O_TMPFILE? */
 		va_list args;
 
 		va_start(args, flags);
@@ -398,7 +398,7 @@ int openat(int dirfd, const char *path, int flags, ...)
 	int ret;
 	PROLOG(openat);
 
-	if (flags & (O_CREAT | O_TMPFILE)) { #if this creates errors, remove O_TMPFILE?
+	if (flags & (O_CREAT | O_TMPFILE)) { /* #if this creates errors, remove O_TMPFILE? */
 		va_list args;
 
 		va_start(args, flags);
@@ -442,7 +442,7 @@ int __openat(int dirfd, const char *path, int flags, int mode)
 
 	printf("openat: path: %s\n", path);
 
-	if (flags & (O_CREAT | O_TMPFILE)) { #if this creates errors, remove O_TMPFILE?
+	if (flags & (O_CREAT | O_TMPFILE)) { /* #if this creates errors, remove O_TMPFILE? */
 		ret = orig___openat(dirfd, path, flags, mode);
 	} else {
 #ifdef FAKE
